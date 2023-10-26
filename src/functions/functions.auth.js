@@ -8,8 +8,8 @@ async function checkToken(user) {
   await connect();
   let resToken = await getToken(user.email);
   await closeConnection();
-  console.log("1 - Recuperado Token: " + resToken);
-  console.log(" ");
+  console.log(" Recuperado Token: " + resToken);
+
   return resToken;
 
 }
@@ -25,14 +25,13 @@ async function checkUser(user) {
 }
 
 async function generateToken(user) {
-
+  //const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: 10});
   const token = jwt.sign(user, process.env.JWT_SECRET);
   await connect();
   let resToken = await saveToken(user.email, token);
   await closeConnection();
 
   console.log(" Resultado del almacenamiento:", resToken);
-  console.log(" ");
 
   return token;
 

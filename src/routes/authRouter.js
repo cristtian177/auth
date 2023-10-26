@@ -38,15 +38,24 @@ const {checkToken,checkUser,generateToken,createUser} = require('../functions/fu
 router.get("/proteced", isLoggedIn, async (req, res) => {
   try {
 
-    // Si existe el usuario, generar token y devuelve como respuesta
+    // Si existe el usuario, genera token y devuelve como respuesta
 
     const exists = await checkUser(req.user);
 
     if (exists) {
+
+      // Revisa si hay un token guardado
       console.log("2 - El correo electrónico ya está registrado.");
+      const token = await checkToken(req.user);
+      if (token) {
+        console.log(" ");
+        return res.status(200).json({ token: token });
+      }
+
       console.log("2 - Generado Token");
       const newToken = await generateToken(req.user);
       console.log("2 - Token Guardado - Inicio de sesión exitoso");
+      console.log(" ");
       return res.status(200).json({ token: newToken });
     }
 
@@ -56,13 +65,13 @@ router.get("/proteced", isLoggedIn, async (req, res) => {
       // Revisa si hay un token guardado
       const token = await checkToken(req.user);
       if (token) return res.status(200).json({ token: token });
+      console.log(" ");
     }
     
     console.log("3 - Generado Token ");
     const newToken = await generateToken(req.user);
     console.log("3 - Usuario creado")
-    return  res.status(200).json( {token: newToken} );
-
+    return  [console.log(" ") ,res.status(200).json( {token: newToken} )]
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al iniciar sesión" });
