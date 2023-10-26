@@ -1,17 +1,13 @@
-/*
 const { createClient } = require("@redis/client");
 
-let client;*/
-const redis = require ('redis')
-
-// Crear una instancia de redis
-const client = redis.createClient ()
+let client;
 
 async function connect() {
-  client.on("error", (err) => {
-    console.error("Error en el cliente de Redis:", err);
-  });
-  await client.connect();
+    client = createClient();
+    client.on("error", (err) => {
+        console.error("Error en el cliente de Redis:", err);
+    });
+    await client.connect();
 }
 
 async function saveToken(email, token) {
