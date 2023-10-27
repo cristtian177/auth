@@ -26,7 +26,7 @@ async function checkUser(user) {
 
 async function generateToken(user) {
   //const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: 10});
-  const token = jwt.sign(user, process.env.JWT_SECRET);
+  const token = jwt.sign(user, 'SecretToken');
   await connect();
   let resToken = await saveToken(user.email, token);
   await closeConnection();

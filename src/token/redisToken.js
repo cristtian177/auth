@@ -12,7 +12,7 @@ async function connect() {
 
 async function saveToken(email, token) {
   try {
-    client.SETEX(email, 10, token, (err, reply) => {
+    client.SETEX(email, 3600, token, (err, reply) => {
       if (err) {
         console.error(err);
       } else {

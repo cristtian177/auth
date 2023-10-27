@@ -1,7 +1,7 @@
 const { Client } = require("pg");
 
+const DATABASE_URL = 'postgresql://postgres:password@localhost:5432/users'
 /*
-DATABASE_URL=postgresql://postgres:password@localhost:5432/users
 const connectionData = {
     user: "postgres",
     password: "password",
@@ -13,7 +13,7 @@ const connectionData = {
 
 require("dotenv").config();
 
-const client = new Client(process.env.DATABASE_URL);
+const client = new Client(DATABASE_URL);
 
 client
     .connect()
